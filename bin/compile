@@ -139,6 +139,10 @@ sed -i s:/usr/bin:/app/nib: "$BUILD_DIR/.apt/usr/bin/Xvfb"
 # create symlinks for Xvfb to use /app/.apt/usr/...
 ln -s /app/.apt/usr/bin $BUILD_DIR/nib
 
+# Freedom patch Xvfb to use correct location for xkb configs
+sed -i s:/usr/share/X11/xkb:/app/.apt/.X11-xkb: "$BUILD_DIR/.apt/usr/bin/Xvfb"
+ln -s /app/.apt/usr/share/X11/xkb $BUILD_DIR/.apt/x11-xkb
+
 topic "Setting up Xvfb display"
 # Start an Xvfb display in the background at startup, and export the display
 # number so that chrome will use it
